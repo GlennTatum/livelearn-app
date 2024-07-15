@@ -9,13 +9,6 @@ import Course from './components/Course';
 
 function App() {
 
-  const courseInfo = [
-    {
-      courseName: 'AP Seminar',
-      courseDescription: 'Develop and practice the skills in research, collaboration, and communication that you’ll need in any academic discipline. You’ll investigate topics in a variety of subject areas, write research-based essays, and design and give presentations both individually and as part of a team.',
-    }
-  ]
-
   return (
   <div>
     <Container>
