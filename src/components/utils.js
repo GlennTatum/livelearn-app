@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const send = async (text, subject) => {
-  const apiKey = "sk-proj-vVVDYvlqKScOXxLXkxhIT3BlbkFJHLPoA3xNphMEdR3DvqF2";
+  const apiKey = "sk-proj-oNAy8MztIPTuBiKQyLEbT3BlbkFJgJWYd3zXw8UZDKRcRO5X";
   const url = "https://api.openai.com/v1/chat/completions";
 
   const headers = {
