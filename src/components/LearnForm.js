@@ -45,10 +45,14 @@ export default function LearnForm() {
     reader.readAsText(file);
   };
   return (
-    <div>
-      <h1 className="p-4 text-center">Lesson Plan Creator</h1>
-      <form onSubmit={UploadHandler} className="p-4 flex flex-col items-center">
-        <div className="w-full max-w-md">
+    <div style={{ backgroundColor: "lightgray" }}>
+      <h1 className=" p-4 text-center">Lesson Plan Creator</h1>
+      <form
+        onSubmit={UploadHandler}
+        className="p-4 flex flex-col items-center"
+        style={{ backgroundColor: "azure" }}
+      >
+        <div className="w-full max-w-md" style={{ backgroundColor: "azure" }}>
           <div className="mb-4">
             <label htmlFor="subject" className="block mb-4">
               Subject:{" "}
@@ -91,6 +95,17 @@ export default function LearnForm() {
           <form>
             <div
               className="lesson-plans"
+              style={{
+                backgroundColor: "#f8f9fa",
+                border: "1px solid #e9ecef",
+                borderRadius: "8px",
+                padding: "16px",
+                margin: "16px 0",
+                boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                fontFamily: "Arial, sans-serif",
+                lineHeight: 1.6,
+                color: "#333",
+              }}
               dangerouslySetInnerHTML={{
                 __html: response.replace(/\n/g, "<br/>"),
               }}

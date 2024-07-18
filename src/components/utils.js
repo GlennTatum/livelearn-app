@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const send = async (text, subject) => {
-  const apiKey = "sk-proj-xH1Hiuz60rtSRbgEJnreT3BlbkFJCVm128xxDGbV5RpDJvN4";
+  const apiKey = "sk-proj-vVVDYvlqKScOXxLXkxhIT3BlbkFJHLPoA3xNphMEdR3DvqF2";
   const url = "https://api.openai.com/v1/chat/completions";
 
   const headers = {
@@ -15,14 +15,14 @@ export const send = async (text, subject) => {
   <<<${text}>>>
   
   Format the response as follows:
-  - Use clear paragraphs for each subtopic.
+  - You must generate ALL the lesson plans for each subtopic. It is CRITICAL that YOU DO NOT LEAVE ANY OUT. Make sure every subtopic listed has a corresponding lesson plan for each learning plan.
   - Separate each learning type with a new paragraph.
   - Use bullet points or a numbered list to organize detailed steps
   - Provide headers for each subtopic and each learning type within that.
-  - Do not branch off and discuss anything else. Go straight into talking about the lesson plans and fully generate the response, giving all the lesson plans.
+  - Do not branch off and discuss anything else. Go straight into talking about the lesson plans and fully generate the response.
   - Do not hesistate in between creating lesson plans and you must go into extensive detail.`;
   const data = {
-    model: "gpt-4o",
+    model: "gpt-4",
     messages: [
       {
         role: "system",
