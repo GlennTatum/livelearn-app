@@ -1,0 +1,35 @@
+.navbar {
+    background-color: #333;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 1rem;
+  }
+  
+  .navList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .navItem {
+    margin-bottom: 1rem;
+  }
+  
+  .navLink {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.5rem;
+  }
+  
+  .navLink:hover {
+    color: #ffd700;
+    background-color: #444;
+  }

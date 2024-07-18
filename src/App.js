@@ -1,26 +1,27 @@
-import React from 'react';
+import React from "react";
+import LearnForm from "./components/LearnForm";
+import Navbar from "./components/navBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Accordian from 'react-bootstrap/Accordion';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import Course from './components/Course';
+function Home() {
+  return (
+    <div className="flex-row flex-1 bg-red-500">Welcome to the Home Page</div>
+  );
+}
 
 function App() {
-
   return (
-  <div>
-    <Container>
-      <Row>
-        <Col>
-        <Accordian defaultActiveKey="0">
-          <Course courseName={'AP Seminar'} courseDescription={'Get Started with AP Seminar'} />
-        </Accordian>
-        </Col>
-      </Row>
-    </Container>
-  </div>
+    <>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/LearnForm" element={<LearnForm />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 

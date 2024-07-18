@@ -1,33 +1,103 @@
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Button from 'react-bootstrap/Button';
+"use client";
+import React, { useState } from "react";
+import { send } from "./utils";
 
-async function onComplete(value) {
+export default function LearnForm() {
+  const [subject, setSubject] = useState("");
+  const [file, setFile] = useState(null);
+  const [response, setResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    console.log(value)
-    // let file = value.target.files[0];
-    // const reader = new FileReader();
-    // reader.onload = (e) => {
-    //   file.data = e.target.result;
-    // }
-    // reader.readAsArrayBuffer(file);
-  }
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value);
+  };
 
-export default function LearnForm(props) {
+  const handleFilechange = async (event) => {
+    setFile(event.target.files[0]);
+  };
 
-    // create useState hooks per form entry
+  const UploadHandler = async (event) => {
+    event.preventDefault();
+    if (!subject || !file) {
+      alert("Please enter a subject and select a file first.");
+      return;
+    }
 
-    // create a local onSubmit function which takes in the useState hooks
+    setIsLoading(true);
 
-    return (
-        <Form onSubmit={onComplete}>
-          <Form.Group controlId='formFile'>
-            <Form.Label>Upload File</Form.Label>
-            <Form.Control type="file" onChange={onComplete}/>
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-    );
+    const reader = new FileReader();
+
+    reader.onload = async (e) => {
+      const fileContent = e.target.result;
+
+      try {
+        const res = await send(fileContent, subject);
+
+        setResponse(res);
+      } catch (error) {
+        console.error("Error:", error);
+        console.log(error, error);
+        setResponse("Error processing the request.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    reader.readAsText(file);
+  };
+  return (
+    <div>
+      <h1 className="p-4 text-center">Lesson Plan Creator</h1>
+      <form onSubmit={UploadHandler} className="p-4 flex flex-col items-center">
+        <div className="w-full max-w-md">
+          <div className="mb-4">
+            <label htmlFor="subject" className="block mb-4">
+              Subject:{" "}
+            </label>
+
+            <input
+              type="text"
+              id="subject"
+              value={subject}
+              onChange={handleSubjectChange}
+              placeholder="Enter the file's subject"
+              className="w-full p-2 border rounded"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="file" className="block mb-2">
+              File:{" "}
+            </label>
+            <input
+              type="file"
+              id="file"
+              onChange={handleFilechange}
+              accept=".txt"
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="mt-4 px-4 py-2 text-black rounded hover:bg-blue-600"
+          disabled={isLoading || !file || !subject}
+        >
+          {isLoading ? "Processing..." : "Upload and Process"}
+        </button>
+      </form>
+      {response && (
+        <div className="mt-8 p-4">
+          <h3 className="text-xl font-bold mb-4">Lesson Plan:</h3>
+          <form>
+            <div
+              className="lesson-plans"
+              dangerouslySetInnerHTML={{
+                __html: response.replace(/\n/g, "<br/>"),
+              }}
+            />
+          </form>
+        </div>
+      )}
+    </div>
+  );
 }
