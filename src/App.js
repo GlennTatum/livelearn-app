@@ -1,27 +1,55 @@
 import React from "react";
 import LearnForm from "./components/LearnForm";
-import Navbar from "./components/navBar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Login from "./components/Login";
+import Layout from "./components/layout";
+import { AuthProvider, useAuth } from "./AuthContext";
 
 function Home() {
   return (
-    <div className="flex-row flex-1 bg-red-500">Welcome to the Home Page</div>
+    <div className="flex-row flex-1" style={{ backgroundColor: "blueviolet" }}>
+      Welcome to the Home Page
+    </div>
   );
 }
 
+const AppRoute = () => {
+  const { isSignedIn } = useAuth();
+  return (
+    <Routes>
+      <Route path="/Login" element={<Login />} />
+
+      <Route path="/" element={<Layout />}>
+        <Route
+          index
+          element={isSignedIn ? <Home /> : <Navigate to="/Login" />}
+        />
+        <Route
+          path="/LearnForm"
+          element={isSignedIn ? <LearnForm /> : <Navigate to="/Login" />}
+        />
+      </Route>
+      <Route
+        path="*"
+        element={isSignedIn ? <Navigate to="/" /> : <Navigate to="/Login" />}
+      />
+    </Routes>
+  );
+};
+
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Router>
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/LearnForm" element={<LearnForm />} />
-          </Routes>
-        </div>
+        <AppRoute />
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 
