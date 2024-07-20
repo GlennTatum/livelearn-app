@@ -1,3 +1,4 @@
+/* eslint no-eval: 0 */
 import React, { useState,useRef } from 'react';
 import Editor from "@monaco-editor/react";
 const files ={
@@ -39,7 +40,6 @@ const StudentLab = () => {
    function evaluateJavaScriptCode() {
     if (editorRef.current) {
         try {
-            /*eslint no-eval: "error"*/
             const result = eval(editorRef.current.getValue());  // Evaluate the code from the editor
             alert("Result: " + result);
         } catch (error) {
