@@ -39,6 +39,7 @@ const StudentLab = () => {
    function evaluateJavaScriptCode() {
     if (editorRef.current) {
         try {
+            /*eslint no-eval: "error"*/
             const result = eval(editorRef.current.getValue());  // Evaluate the code from the editor
             alert("Result: " + result);
         } catch (error) {
