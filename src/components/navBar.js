@@ -14,6 +14,9 @@ function NavBar() {
             <Nav.Link href="/LearnForm" className="">
               LearnForm
             </Nav.Link>
+            <Nav.Link href="/StudentLab" className="">
+              Student Lab
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
