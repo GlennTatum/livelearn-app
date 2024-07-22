@@ -62,6 +62,7 @@ export const sendFeedback = async (text, feedback, subject) => {
   Format the response as follows:
   - You must generate ALL the exam questions for each subtopic. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
   - Separate each question
+  - Make sure to take into account every facet and aspect of the provided feedback, based on that, make questions that would most benefit the student's learning process from that feedback
   - Use bullet points or a numbered list to organize detailed question parts
   - DO NOT PROVIDE THE SOLUTIONS IN YOUR RESPONSE
   - Do not branch off and discuss anything else. Go straight into creating the new practice exam and fully generate the response.
@@ -72,6 +73,50 @@ export const sendFeedback = async (text, feedback, subject) => {
       {
         role: "system",
         content: `You are a helpful teacher with years of experience in writing exams and you are also an expert in ${subject}`,
+      },
+      { role: "user", content: prompt },
+    ],
+    max_tokens: 4000,
+  };
+
+  try {
+    const res = await axios.post(url, data, { headers });
+    return res.data.choices[0].message.content;
+  } catch (error) {
+    console.error("Error with gpt", error);
+    throw error;
+  }
+};
+
+export const sendExam = async (text, subject) => {
+  const apiKey = "sk-proj-hIQjVns3OHNrnbZElBXiT3BlbkFJJsxCzE7zyVrkRPaeG2Zl";
+  const url = "https://api.openai.com/v1/chat/completions";
+
+  const headers = {
+    "Content-Type": `application/json`,
+    Authorization: `Bearer ${apiKey}`,
+  };
+  const prompt = `Given the following text delimited by triple brackets of a graded exam, return your feedback (like a teacher would on the end of an exam) on how the student could improve for next time etc, and be as precise as possible.
+  Take a deep breath in between each step; do not forget any of the instructions.
+  Graded exam:
+  <<<${text}>>>
+  
+  When writing your feedback, make sure to include the following attributes in your response:
+  question_types_to_work_on: Types of questions that the student needs to work on based on what they got wrong, for example "Multiple choice", "Long-form", "Prove ...", "Solve for ...", "Consider ... Find ..." etc. These are just some possible question types that may appear and note that "..." can be a kind of statement in the question, following the command that the student is asked to do.
+  subtopics: List the subtopics that the student needs to work on based on what they got wrong or struggled with in the exam. This may vary subject to subject, so you should be able to deduce which subtopics were in the exam based on the questions. Do not make broad statements in this, try to be as specific as possible.
+  study_types: list out any recommended types of studying the student should do to improve on a specific subject
+
+  Format the response as follows:
+  - You must generate feedback for ALL the exam questions. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
+  - The response should be 1-2 paragraphs long, depending on how much they got right or wrong (eg. if more was wrong then there should be more feedback on how to improve)
+  - Do not branch off and discuss anything else. Go straight into generating the feedback and fully generate the response.
+  - Do not hesitate and you must go into extensive detail.`;
+  const data = {
+    model: "gpt-4o",
+    messages: [
+      {
+        role: "system",
+        content: `You are a helpful teacher with years of experience in grading exams, writing feedback and you are also an expert in ${subject}`,
       },
       { role: "user", content: prompt },
     ],

@@ -11,6 +11,7 @@ import StudentLayout from "./components/studentLayout";
 import StudentHome from "./components/StudentHome";
 import TeacherHome from "./components/TeacherHome";
 import ExamBuilder from "./components/exambuilder";
+import FeedbackGen from "./components/feedbackgenerator";
 
 const ProtectedRoute = ({ element: Element, requiredUserType }) => {
   const { isSignedIn, userType } = useAuth();
@@ -40,6 +41,15 @@ const AppRoute = () => {
           path="LearnForm"
           element={
             <ProtectedRoute element={LearnForm} requiredUserType={"teacher"} />
+          }
+        />
+        <Route
+          path="feedback"
+          element={
+            <ProtectedRoute
+              element={FeedbackGen}
+              requiredUserType={"teacher"}
+            />
           }
         />
       </Route>

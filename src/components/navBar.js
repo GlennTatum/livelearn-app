@@ -32,6 +32,11 @@ function NavBar() {
                 LearnForm
               </Nav.Link>
             )}
+            {userType === "teacher" && (
+              <Nav.Link href="/teacher/feedback" className="">
+                FeedbackGenerator
+              </Nav.Link>
+            )}
             {userType === "student" && (
               <Nav.Link href="/student/lab" className="">
                 Student Lab
