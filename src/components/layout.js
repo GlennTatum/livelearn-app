@@ -24,6 +24,9 @@ const Layout = () => {
                 <Nav.Link href="/LearnForm" className="">
                   LearnForm
                 </Nav.Link>
+                <Nav.Link href="/StudentLab" className="">
+                  StudentLab
+                </Nav.Link>
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </Nav>
             </Navbar.Collapse>

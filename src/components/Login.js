@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { useAuth } from "../AuthContext";
 
-const Login = ({ setIsAuth }) => {
+const Login = () => {
   const [user, setUser] = useState("");
   const [pass, setPassword] = useState("");
   const [error, setError] = useState("");

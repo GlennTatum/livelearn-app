@@ -1,8 +1,12 @@
 import React from "react";
 import LearnForm from "./components/LearnForm";
-import Navbar from "./components/navBar";
-import StudentLab from "./components/StudentLab";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+import Login from "./components/Login";
+import Layout from "./components/layout";
+import { Navigate } from "react-router-dom";
+import { AuthProvider } from "./AuthContext";
+import StudentLab from "./components/StudentLab";
 
 function Home() {
   return (
@@ -27,7 +31,12 @@ const AppRoute = () => {
           path="/LearnForm"
           element={isSignedIn ? <LearnForm /> : <Navigate to="/Login" />}
         />
+        <Route
+          path="/StudentLab"
+          element={isSignedIn ? <StudentLab /> : <Navigate to="/Login" />}
+        />
       </Route>
+
       <Route
         path="*"
         element={isSignedIn ? <Navigate to="/" /> : <Navigate to="/Login" />}
@@ -40,14 +49,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/LearnForm" element={<LearnForm />} />
-            <Route path="/StudentLab" element={<StudentLab />} />
-          </Routes>
-        </div>
+        <AppRoute />
       </Router>
     </AuthProvider>
   );

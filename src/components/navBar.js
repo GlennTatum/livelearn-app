@@ -27,6 +27,7 @@ function NavBar() {
             <Nav.Link href="/StudentLab" className="">
               Student Lab
             </Nav.Link>
+            <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
