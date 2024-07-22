@@ -65,7 +65,7 @@ export const sendFeedback = async (text, feedback, subject) => {
   - Use bullet points or a numbered list to organize detailed question parts
   - DO NOT PROVIDE THE SOLUTIONS IN YOUR RESPONSE
   - Do not branch off and discuss anything else. Go straight into creating the new practice exam and fully generate the response.
-  - Do not hesitate in between creating lesson plans and you must go into extensive detail.`;
+  - Do not hesitate in between creating questions and you must go into extensive detail.`;
   const data = {
     model: "gpt-4o",
     messages: [
