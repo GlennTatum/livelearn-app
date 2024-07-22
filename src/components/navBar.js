@@ -20,15 +20,14 @@ function NavBar() {
       <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand href="/">LiveLearn</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto gap-4">
-              <Nav.Link href="/LearnForm" className="">
-                LearnForm
-              </Nav.Link>
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+          <Nav className="me-auto gap-4">
+            <Nav.Link href="/LearnForm" className="">
+              LearnForm
+            </Nav.Link>
+            <Nav.Link href="/StudentLab" className="">
+              Student Lab
+            </Nav.Link>
+          </Nav>
         </Container>
       </Navbar>
       <br />

@@ -1,15 +1,8 @@
 import React from "react";
 import LearnForm from "./components/LearnForm";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/Login";
-import Layout from "./components/layout";
-import { AuthProvider, useAuth } from "./AuthContext";
+import Navbar from "./components/navBar";
+import StudentLab from "./components/StudentLab";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function Home() {
   return (
@@ -47,7 +40,14 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <AppRoute />
+        <div className="App">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/LearnForm" element={<LearnForm />} />
+            <Route path="/StudentLab" element={<StudentLab />} />
+          </Routes>
+        </div>
       </Router>
     </AuthProvider>
   );
