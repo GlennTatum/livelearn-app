@@ -1,0 +1,46 @@
+button{
+    height: 50px;
+    width: 150px;
+    background-color:grey;
+    color: white;
+    border:grey;
+    padding: auto;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgb(0, 0, 0);
+}
+
+button:hover{
+    background-color: darkgray;
+    box-shadow: 3px 3px 7px rgb(0, 0, 0);
+}
+ul{
+    background-color: lightgray;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .editor-container {
+    width: 100%;
+    height: 50vh;
+  }
+  
+  .buttons {
+    margin-bottom: 20px;
+  }
+  
+  .output-panel {
+    width: 100%;
+    height: 300px;
+    background-color: #282c34;
+    color: white;
+    padding: 10px;
+    overflow-y: auto;
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
