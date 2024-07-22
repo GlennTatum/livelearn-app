@@ -6,13 +6,39 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="flex-row flex-1 bg-red-500">Welcome to the Home Page</div>
+    <div className="flex-row flex-1" style={{ backgroundColor: "blueviolet" }}>
+      Welcome to the Home Page
+    </div>
   );
 }
 
+const AppRoute = () => {
+  const { isSignedIn } = useAuth();
+  return (
+    <Routes>
+      <Route path="/Login" element={<Login />} />
+
+      <Route path="/" element={<Layout />}>
+        <Route
+          index
+          element={isSignedIn ? <Home /> : <Navigate to="/Login" />}
+        />
+        <Route
+          path="/LearnForm"
+          element={isSignedIn ? <LearnForm /> : <Navigate to="/Login" />}
+        />
+      </Route>
+      <Route
+        path="*"
+        element={isSignedIn ? <Navigate to="/" /> : <Navigate to="/Login" />}
+      />
+    </Routes>
+  );
+};
+
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Router>
         <div className="App">
           <Navbar />
@@ -23,7 +49,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </>
+    </AuthProvider>
   );
 }
 
