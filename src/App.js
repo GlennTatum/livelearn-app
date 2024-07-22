@@ -7,40 +7,61 @@ import Layout from "./components/layout";
 import { Navigate } from "react-router-dom";
 import { AuthProvider } from "./AuthContext";
 import StudentLab from "./components/StudentLab";
+import StudentLayout from "./components/studentLayout";
+import StudentHome from "./components/StudentHome";
+import TeacherHome from "./components/TeacherHome";
 
-function Home() {
-  return (
-    <div className="flex-row flex-1" style={{ backgroundColor: "blueviolet" }}>
-      Welcome to the Home Page
-    </div>
+const ProtectedRoute = ({ element: Element, requiredUserType }) => {
+  const { isSignedIn, userType } = useAuth();
+  return isSignedIn && userType === requiredUserType ? (
+    <Element />
+  ) : (
+    <Navigate to="/Login" />
   );
-}
+};
 
 const AppRoute = () => {
-  const { isSignedIn } = useAuth();
   return (
     <Routes>
       <Route path="/Login" element={<Login />} />
 
-      <Route path="/" element={<Layout />}>
+      <Route path="/teacher" element={<Layout />}>
         <Route
           index
-          element={isSignedIn ? <Home /> : <Navigate to="/Login" />}
+          element={
+            <ProtectedRoute
+              element={TeacherHome}
+              requiredUserType={"teacher"}
+            />
+          }
         />
         <Route
-          path="/LearnForm"
-          element={isSignedIn ? <LearnForm /> : <Navigate to="/Login" />}
-        />
-        <Route
-          path="/StudentLab"
-          element={isSignedIn ? <StudentLab /> : <Navigate to="/Login" />}
+          path="LearnForm"
+          element={
+            <ProtectedRoute element={LearnForm} requiredUserType={"teacher"} />
+          }
         />
       </Route>
 
-      <Route
-        path="*"
-        element={isSignedIn ? <Navigate to="/" /> : <Navigate to="/Login" />}
-      />
+      <Route path="/student" element={<StudentLayout />}>
+        <Route
+          path="lab"
+          element={
+            <ProtectedRoute element={StudentLab} requiredUserType={"student"} />
+          }
+        />
+        <Route
+          index
+          element={
+            <ProtectedRoute
+              element={StudentHome}
+              requiredUserType={"student"}
+            />
+          }
+        />
+      </Route>
+
+      <Route path="*" element={<Navigate to="/Login" />} />
     </Routes>
   );
 };

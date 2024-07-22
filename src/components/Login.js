@@ -15,7 +15,7 @@ const Login = () => {
   const [pass, setPassword] = useState("");
   const [error, setError] = useState("");
   const nav = useNavigate();
-  const { setIsSignedIn } = useAuth();
+  const { setIsSignedIn, setUserType } = useAuth();
 
   const student_user = "student";
   const student_pass = "password1";
@@ -27,10 +27,12 @@ const Login = () => {
     e.preventDefault();
     if (user === teacher_user && pass === teacher_pass) {
       setIsSignedIn(true);
-      nav("/");
+      setUserType("teacher");
+      nav("/teacher");
     } else if (user === student_user && pass === student_pass) {
       setIsSignedIn(true);
-      nav("/exambuilder");
+      setUserType("student");
+      nav("/student");
     } else {
       setError("Invalid, please try again.");
     }

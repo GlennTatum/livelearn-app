@@ -1,8 +1,7 @@
-"use client";
 import React, { useState } from "react";
 import { send } from "./utils";
 
-export default function LearnForm() {
+const LearnForm = () => {
   const [subject, setSubject] = useState("");
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState("");
@@ -115,4 +114,6 @@ export default function LearnForm() {
       )}
     </div>
   );
-}
+};
+
+export default LearnForm;

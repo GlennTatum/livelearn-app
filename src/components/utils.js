@@ -21,7 +21,7 @@ export const send = async (text, subject) => {
   - Use bullet points or a numbered list to organize detailed steps
   - Provide headers for each subtopic and each learning type within that.
   - Do not branch off and discuss anything else. Go straight into talking about the lesson plans and fully generate the response.
-  - Do not hesistate in between creating lesson plans and you must go into extensive detail.`;
+  - Do not hesitate in between creating lesson plans and you must go into extensive detail.`;
   const data = {
     model: "gpt-4o",
     messages: [

@@ -7,13 +7,20 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("isSignedIn") || false)
   );
 
+  const [userType, setUserType] = useState(
+    () => localStorage.getItem("userType") || ""
+  );
+
   useEffect(() => {
     localStorage.setItem("isSignedIn", JSON.stringify(isSignedIn));
-  }, [isSignedIn]);
+    localStorage.setItem("userType", userType);
+  }, [isSignedIn, userType]);
 
   const value = {
     isSignedIn,
     setIsSignedIn,
+    userType,
+    setUserType,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
