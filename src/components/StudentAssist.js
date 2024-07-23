@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
@@ -38,7 +39,7 @@ async function GeminiClientMessage(options) {
     let geminiFileOptions = {
         inlineData: {
             data: blob, // Should be of type Buffer
-            mimeType: "image/png"
+            mimeType: "image/png" // TODO check for png mime type
         }
     }
     
@@ -67,12 +68,23 @@ export default function StudentContentHelper() {
         setFile(f);
     }
 
+    const [getSpinner, setSpinner] = useState(false);
+
+    const spinner = (
+        <Spinner animation="border" role="status">
+        <span className="visually-hidden">Loading...</span>
+        </Spinner>
+    )
+
     const handleSubmit = async (e) => {
+        // On submit create a spinner
+        setSpinner(true);
         let res = await GeminiClientMessage({
             prompt: getPrompt,
             file: getFile
         })
         setResponse(res);
+        setSpinner(false);
     }
 
     return (
