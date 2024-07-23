@@ -27,8 +27,8 @@ function NavBar() {
           >
             <img
               src={Logo}
-              width="30" // Adjust width as needed
-              height="30" // Adjust height as needed
+              width="40" // Adjust width as needed
+              height="40" // Adjust height as needed
               className="d-inline-block align-top" // Aligns the image with the text
               alt="LiveLearn Logo"
             />{' '}
