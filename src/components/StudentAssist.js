@@ -32,7 +32,7 @@ export async function GeminiClientMessage(options) {
 
     let prompt = options.prompt;
 
-    if (options.prompt !== undefined && options.file !== undefined) {
+    if (options.prompt !== undefined && options.file !== null) {
 
         let blob = await filereader(options.file);
     
