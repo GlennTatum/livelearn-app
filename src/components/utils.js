@@ -88,18 +88,22 @@ export const sendFeedback = async (text, feedback, subject) => {
   }
 };
 
-export const sendExam = async (text, subject) => {
-  const apiKey = "sk-proj-hIQjVns3OHNrnbZElBXiT3BlbkFJJsxCzE7zyVrkRPaeG2Zl";
+export const sendExam = async (text, subject, name) => {
+  const apiKey = "sk-proj-hIQjVns3OHNrnbZElBXiT3BlbkFJJsxCzE7zyVrkRPaeG2Zl"; //expired api key
   const url = "https://api.openai.com/v1/chat/completions";
 
   const headers = {
     "Content-Type": `application/json`,
     Authorization: `Bearer ${apiKey}`,
   };
-  const prompt = `Given the following text delimited by triple brackets of a graded exam, return your feedback (like a teacher would on the end of an exam) on how the student could improve for next time etc, and be as precise as possible.
+  const prompt = `Given the following text delimited by triple brackets of a graded exam, return your feedback (like a teacher would on the end of an exam) on how the student could improve for next time etc, and be as precise as possible. The student's name is delimted by a square bracket.
   Take a deep breath in between each step; do not forget any of the instructions.
+  
   Graded exam:
   <<<${text}>>>
+
+  Student's name:
+  [${name}]
   
   When writing your feedback, make sure to include the following attributes in your response:
   question_types_to_work_on: Types of questions that the student needs to work on based on what they got wrong, for example "Multiple choice", "Long-form", "Prove ...", "Solve for ...", "Consider ... Find ..." etc. These are just some possible question types that may appear and note that "..." can be a kind of statement in the question, following the command that the student is asked to do.
@@ -107,6 +111,7 @@ export const sendExam = async (text, subject) => {
   study_types: list out any recommended types of studying the student should do to improve on a specific subject
 
   Format the response as follows:
+  - Make sure to use the student's name appropriately in sentences WHERE IT IS APPLICABLE and not in every sentence.
   - You must generate feedback for ALL the exam questions. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
   - The response should be 1-2 paragraphs long, depending on how much they got right or wrong (eg. if more was wrong then there should be more feedback on how to improve)
   - Do not branch off and discuss anything else. Go straight into generating the feedback and fully generate the response.
