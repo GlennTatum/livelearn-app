@@ -48,11 +48,6 @@ function NavBar() {
               </Nav.Link>
             )}
             {userType === "student" && (
-              <Nav.Link href="/student/exambuilder" className="">
-                Student Study Exam Builder
-              </Nav.Link>
-            )}
-            {userType === "student" && (
               <Nav.Link href="/student/contentreview" className="">
                 Content Helper
               </Nav.Link>
