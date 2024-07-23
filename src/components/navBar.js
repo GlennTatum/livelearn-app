@@ -47,6 +47,16 @@ function NavBar() {
                 Student Study Exam Builder
               </Nav.Link>
             )}
+            {userType === "student" && (
+              <Nav.Link href="/student/exambuilder" className="">
+                Student Study Exam Builder
+              </Nav.Link>
+            )}
+            {userType === "student" && (
+              <Nav.Link href="/student/contentreview" className="">
+                Content Helper
+              </Nav.Link>
+            )}
 
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
