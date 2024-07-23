@@ -1,6 +1,7 @@
 /* eslint no-eval: 0 */
 import React, { useState,useRef } from 'react';
 import Editor from "@monaco-editor/react";
+import Button from "react-bootstrap/Button";
 const files ={
     "index.html" :{
         name:"index.html",
@@ -52,12 +53,11 @@ const StudentLab = () => {
     return (
         <div>
              <ul>
-             <button onClick={() => setFileName("index.html")}>HTML</button>
-             <button onClick={() => setFileName("script.py")}>Python</button>
-             <button onClick={() => setFileName("main.java")}>Java</button>
-             <button onClick={() => getEditorValue()}>Show code</button>
-             <button onClick={() => evaluateJavaScriptCode()}>Run</button>
-             
+             <Button className='editor-button mx-2' onClick={() => setFileName("index.html")}>HTML</Button>
+             <Button className='editor-button' onClick={() => setFileName("script.py")}>Python</Button>
+             <Button className='editor-button mx-2' onClick={() => setFileName("main.java")}>Java</Button>
+             <Button className='editor-button' onClick={() => getEditorValue()}>Show code</Button>
+             <Button className='editor-button mx-2' onClick={() => evaluateJavaScriptCode()}>Run</Button>
             </ul>
           <Editor
           height= "50vh"
@@ -68,6 +68,10 @@ const StudentLab = () => {
           defaultLanguage={file.language}
           defaultValue={file.value}
           ></Editor> 
+
+          <div>
+            <p>Output Panel</p>
+          </div>
         </div>
     );
 };

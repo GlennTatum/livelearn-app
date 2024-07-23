@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-async function GeminiClientMessage(options) {
+export async function GeminiClientMessage(options) {
 
     const genAI = new GoogleGenerativeAI("AIzaSyDjPJrMD5oh0_wIJZRWOXzjAKWep6hHQZ8");
 
