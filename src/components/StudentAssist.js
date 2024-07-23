@@ -30,22 +30,28 @@ export async function GeminiClientMessage(options) {
         });
     };
 
-    let prompt = options.prompt
+    let prompt = options.prompt;
 
-    let blob = await filereader(options.file);
+    if (options.prompt !== undefined && options.file !== undefined) {
 
-    console.log(blob);
-
-    let geminiFileOptions = {
-        inlineData: {
-            data: blob, // Should be of type Buffer
-            mimeType: "image/png" // TODO check for png mime type
-        }
-    }
+        let blob = await filereader(options.file);
     
-    const result = await model.generateContent([prompt, geminiFileOptions]);
+        let geminiFileOptions = {
+            inlineData: {
+                data: blob, // Should be of type Buffer
+                mimeType: "image/png" // TODO check for png mime type
+            }
+        }
+
+        const result = await model.generateContent([prompt, geminiFileOptions]);
+
+        return result.response.text();
+    }
+
+    const result = await model.generateContent([prompt]);
 
     return result.response.text();
+
 }
 
 export default function StudentContentHelper() {
