@@ -68,23 +68,23 @@ export default function StudentContentHelper() {
         setFile(f);
     }
 
-    const [getSpinner, setSpinner] = useState(false);
+    // const [getSpinner, setSpinner] = useState(false);
 
-    const spinner = (
-        <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-        </Spinner>
-    )
+    // const spinner = (
+    //     <Spinner animation="border" role="status">
+    //     <span className="visually-hidden">Loading...</span>
+    //     </Spinner>
+    // )
 
     const handleSubmit = async (e) => {
         // On submit create a spinner
-        setSpinner(true);
+        // setSpinner(true);
         let res = await GeminiClientMessage({
             prompt: getPrompt,
             file: getFile
         })
         setResponse(res);
-        setSpinner(false);
+        // setSpinner(false);
     }
 
     return (
