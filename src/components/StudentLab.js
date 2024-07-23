@@ -12,7 +12,7 @@ const files = {
 </head>
 <body>
     <script>
-        
+        // Your JavaScript here
     </script>
 </body>
 </html>`
@@ -20,7 +20,7 @@ const files = {
     "script.py": {
         name: "script.py",
         language: "python",
-        value: `# Example Python code`
+        value: `# Write your Python code here`
     },
     "main.java": {
         name: "main.java",
@@ -38,15 +38,15 @@ const StudentLab = () => {
     const [output, setOutput] = useState("");
     const editorRef = useRef(null);
 
-    const file = files[fileName];
-
     useEffect(() => {
-        const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js";
-        script.type = "text/javascript";
-        script.onload = () => window.brython();
-        document.head.appendChild(script);
-    }, []);
+        if (fileName === "index.html") {
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/brython@3.9.5/brython.min.js";
+            script.type = "text/javascript";
+            script.onload = () => window.brython();
+            document.head.appendChild(script);
+        }
+    }, [fileName]);
 
     function handleEditorDidMount(editor, monaco) {
         editorRef.current = editor;
@@ -68,7 +68,6 @@ const StudentLab = () => {
     function evaluateJavaScriptCode() {
         const code = editorRef.current.getValue();
         const jsCode = extractJavaScriptFromHTML(code);
-
         if (jsCode) {
             try {
                 const log = [];
@@ -77,7 +76,7 @@ const StudentLab = () => {
                     log.push(args.join(' '));
                     originalConsoleLog(...args);
                 };
-                eval(jsCode); // Evaluate the extracted JavaScript code
+                eval(jsCode); 
                 console.log = originalConsoleLog;
                 setOutput(log.join('\n'));
             } catch (error) {
@@ -91,7 +90,9 @@ const StudentLab = () => {
     function evaluatePythonCode() {
         const code = editorRef.current.getValue();
 
-        const script = `
+        const script = document.createElement("script");
+        script.type = "text/python";
+        script.text = `
 from browser import document, console
 import sys
 
@@ -110,19 +111,39 @@ ${code}
 
 output = sys.stdout.data + sys.stderr.data
 console.log(output)
-document["output-panel"].textContent = output
+document.getElementById('output-panel').textContent = output
         `;
 
-        const scriptElement = document.createElement("script");
-        scriptElement.type = "text/python";
-        scriptElement.innerHTML = script;
-        document.body.appendChild(scriptElement);
+        document.body.appendChild(script);
 
         window.setTimeout(() => {
             const outputDiv = document.getElementById("output-panel");
-            setOutput(outputDiv ? outputDiv.textContent : "Error running Python code.");
-            document.body.removeChild(scriptElement);
+            if(outputDiv) {
+                setOutput(outputDiv.textContent);
+            } else {
+                setOutput("No output generated or error in Python script execution.");
+            }
+            document.body.removeChild(script);
         }, 1000);
+    }
+
+    function evaluateJavaCode() {
+        const code = editorRef.current.getValue();
+        fetch('http://your-backend-url/execute-java', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ code: code })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => setOutput(data.output))
+        .catch(error => setOutput("Error evaluating Java code: " + error.message));
     }
 
     function handleRun() {
@@ -131,18 +152,22 @@ document["output-panel"].textContent = output
             evaluatePythonCode();
         } else if (fileName === "index.html") {
             evaluateJavaScriptCode();
+        } else if (fileName === "main.java") {
+            evaluateJavaCode();
         } else {
             setOutput("Running code for this language is not supported.");
         }
     }
 
+    const file = files[fileName]; // Ensure file is defined based on fileName
+
     return (
         <div className="container">
             <div className="buttons">
-                <button onClick={() => setFileName("index.html")}>HTML</button>
+                <button onClick={() => setFileName("index.html")}>JavaScript</button>
                 <button onClick={() => setFileName("script.py")}>Python</button>
                 <button onClick={() => setFileName("main.java")}>Java</button>
-                <button onClick={() => getEditorValue()}>Show code</button>
+                <button onClick={() => getEditorValue()}>Show Code</button>
                 <button onClick={() => handleRun()}>Run</button>
             </div>
             <div className="editor-container">
