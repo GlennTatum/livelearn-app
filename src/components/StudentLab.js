@@ -1,10 +1,7 @@
-<<<<<<< HEAD
+
 import React, { useState, useRef, useEffect } from 'react';
 import "./StudentLab.css";
-=======
 /* eslint no-eval: 0 */
-import React, { useState,useRef } from 'react';
->>>>>>> upstream/main
 import Editor from "@monaco-editor/react";
 
 const files = {
