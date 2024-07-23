@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { send } from "./utils";
+import { sendFeedback } from "./utils";
+import Form from "react-bootstrap/Form";
 
-const LearnForm = () => {
+const ExamBuilder = () => {
   const [subject, setSubject] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleFeedbackChange = (event) => {
+    setFeedback(event.target.value);
+  };
   const handleSubjectChange = (event) => {
     setSubject(event.target.value);
   };
@@ -17,8 +22,8 @@ const LearnForm = () => {
 
   const UploadHandler = async (event) => {
     event.preventDefault();
-    if (!subject || !file) {
-      alert("Please enter a subject and select a file first.");
+    if (!feedback || !file || !subject) {
+      alert("Please enter a subject/feedback and select a file first.");
       return;
     }
 
@@ -30,7 +35,7 @@ const LearnForm = () => {
       const fileContent = e.target.result;
 
       try {
-        const res = await send(fileContent, subject);
+        const res = await sendFeedback(fileContent, feedback, subject);
 
         setResponse(res);
       } catch (error) {
@@ -45,26 +50,38 @@ const LearnForm = () => {
   };
   return (
     <div style={{ backgroundColor: "lightgray" }}>
-      <h1 className=" p-4 text-center">Lesson Plan Creator</h1>
-      <form
+      <h1 className=" p-4 text-center">Exam builder</h1>
+      <Form
         onSubmit={UploadHandler}
         className="p-4 flex flex-col items-center"
         style={{ backgroundColor: "azure" }}
       >
         <div className="w-full max-w-md" style={{ backgroundColor: "azure" }}>
           <div className="mb-4">
-            <label htmlFor="subject" className="block mb-4">
-              Subject:{" "}
-            </label>
-
-            <input
-              type="text"
-              id="subject"
-              value={subject}
-              onChange={handleSubjectChange}
-              placeholder="Enter the file's subject"
-              className="w-full p-2 border rounded"
-            />
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Subject: </Form.Label>
+              <Form.Control
+                type="subject"
+                placeholder="Enter the name of your class/subject"
+                id="subject"
+                onChange={handleSubjectChange}
+              />
+            </Form.Group>
+          </div>
+          <div className="mb-4">
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label>Teacher's feedback: </Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={5}
+                type="feedback"
+                id="feedback"
+                onChange={handleFeedbackChange}
+              />
+            </Form.Group>
           </div>
           <div className="mb-4">
             <label htmlFor="file" className="block mb-2">
@@ -83,17 +100,17 @@ const LearnForm = () => {
         <button
           type="submit"
           className="mt-4 px-4 py-2 text-black rounded hover:bg-blue-600"
-          disabled={isLoading || !file || !subject}
+          disabled={isLoading || !file || !feedback || !subject}
         >
-          {isLoading ? "Processing..." : "Upload and Process"}
+          {isLoading ? "Processing..." : "Upload your past exam to LiveLearnAI"}
         </button>
-      </form>
+      </Form>
       {response && (
         <div className="mt-8 p-4">
-          <h3 className="text-xl font-bold mb-4">Lesson Plan:</h3>
+          <h3 className="text-xl font-bold mb-4">Practice exam:</h3>
           <form>
             <div
-              className="lesson-plans"
+              className="exam"
               style={{
                 backgroundColor: "#f8f9fa",
                 border: "1px solid #e9ecef",
@@ -116,4 +133,4 @@ const LearnForm = () => {
   );
 };
 
-export default LearnForm;
+export default ExamBuilder;
