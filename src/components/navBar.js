@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Logo from  "./livelearn.png";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -24,6 +25,13 @@ function NavBar() {
             as={Link}
             to={userType === "teacher" ? "/teacher" : "/student"}
           >
+            <img
+              src={Logo}
+              width="30" // Adjust width as needed
+              height="30" // Adjust height as needed
+              className="d-inline-block align-top" // Aligns the image with the text
+              alt="LiveLearn Logo"
+            />{' '}
             LiveLearn
           </Navbar.Brand>
           <Nav className="me-auto gap-4">
