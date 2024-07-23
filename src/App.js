@@ -12,6 +12,7 @@ import StudentHome from "./components/StudentHome";
 import TeacherHome from "./components/TeacherHome";
 import ExamBuilder from "./components/exambuilder";
 import FeedbackGen from "./components/feedbackgenerator";
+import StudentContentHelper from "./components/StudentAssist";
 
 const ProtectedRoute = ({ element: Element, requiredUserType }) => {
   const { isSignedIn, userType } = useAuth();
@@ -68,6 +69,12 @@ const AppRoute = () => {
           path="lab"
           element={
             <ProtectedRoute element={StudentLab} requiredUserType={"student"} />
+          }
+        />
+        <Route 
+          path="contentreview"
+          element={
+            <ProtectedRoute element={StudentContentHelper} requiredUserType={"student"} />
           }
         />
         <Route
