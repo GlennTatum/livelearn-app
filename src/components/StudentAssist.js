@@ -5,8 +5,18 @@ import Button from 'react-bootstrap/Button';
 // import Spinner from 'react-bootstrap/Spinner';
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import LoadingSpinner from "./LoadingSpinner";
 
 export async function GeminiClientMessage(options) {
+/*
+@param (Object) options - The inputs to the prompt
+
+Example:
+let options;
+options.prompt = "hello gemini!"
+options.file = event.target.files[0] // Must fulfill the File interface
+let rest await = GeminiClientMessage(options);
+*/
 
     const genAI = new GoogleGenerativeAI("AIzaSyDjPJrMD5oh0_wIJZRWOXzjAKWep6hHQZ8");
 
@@ -74,23 +84,16 @@ export default function StudentContentHelper() {
         setFile(f);
     }
 
-    // const [getSpinner, setSpinner] = useState(false);
-
-    // const spinner = (
-    //     <Spinner animation="border" role="status">
-    //     <span className="visually-hidden">Loading...</span>
-    //     </Spinner>
-    // )
+    const [getSpinner, setSpinner] = useState(false);
 
     const handleSubmit = async (e) => {
-        // On submit create a spinner
-        // setSpinner(true);
+        setSpinner(true);
         let res = await GeminiClientMessage({
             prompt: getPrompt,
             file: getFile
         })
         setResponse(res);
-        // setSpinner(false);
+        setSpinner(false);
     }
 
     return (
@@ -110,8 +113,9 @@ export default function StudentContentHelper() {
                 aria-describedby="inputGroup-sizing-sm"
                 />
             </InputGroup>
+            <LoadingSpinner display={getSpinner} />
             <Button onClick={handleSubmit}>Upload</Button>
-            {getResponse}
+            <div>{getResponse}</div>
 
         </>
     );
