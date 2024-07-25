@@ -52,6 +52,11 @@ function NavBar() {
                 Content Helper
               </Nav.Link>
             )}
+            {userType === "student" && (
+              <Nav.Link href="/student/studentprofile" className="">
+                Profile
+              </Nav.Link>
+            )}
 
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
