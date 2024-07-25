@@ -117,7 +117,7 @@ const StudentLab = () => {
         <div>
             <ul style={{backgroundColor:"lightgrey",padding:"10px"}}>
                 <Button className='editor-button mx-2'style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("index.html")}>JavaScript</Button>
-                <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("program.cs")}>#C</Button>
+                <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("program.cs")}>C#</Button>
                 <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("script.py")}>Python</Button>
                 <Button className='editor-button mx-2' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("main.java")}>Java</Button>
                 <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={getEditorValue}>Show code</Button>
