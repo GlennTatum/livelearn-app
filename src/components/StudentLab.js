@@ -45,7 +45,8 @@ const files = {
                 "// Keep the console window open after the message is displayed.\n"+
                "Console.WriteLine('Press any key to exit.');\n"+
                 "Console.ReadKey();\n"+
-           " }\n"
+           " }\n"+
+           "}"
         }
     };
 const buttonStyle = (isHovered) => ({
@@ -134,7 +135,7 @@ const StudentLab = () => {
             ></Editor>
 
             <div>
-                <div style={{ backgroundColor: "#ECE3E3",color:"blue", height: "300px", width:"300vh", padding: "10px" }}>
+                <div style={{ backgroundColor: "#ECE3E3",color:"blue", height: "300px", width:"300vh", padding: "10px"}}>
                 <p>Output:</p>
                     {output}
                 </div>
