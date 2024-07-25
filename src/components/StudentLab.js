@@ -12,7 +12,7 @@ const files = {
             "</head>\n" +
             "<body>\n" +
             " <script>\n" +
-            "   console.log('Hello, world!');\n" + // This will be captured and displayed
+            "   console.log('Hello, world!');\n" + 
             " </script>\n" +
             "</body>\n" +
             "</html>"
@@ -33,8 +33,21 @@ const files = {
             "        System.out.println('Hello, world!');\n" +
             "    }\n" +
             "}"
-    }
-};
+    },
+    "program.cs": {
+        name: "program.java",
+        language: "#C",
+        value: " class Program{\n"+
+       
+            "static void Main(string[] args)\n"+
+            "{"+
+               " Console.WriteLine('Hello World!');\n"+
+                "// Keep the console window open after the message is displayed.\n"+
+               "Console.WriteLine('Press any key to exit.');\n"+
+                "Console.ReadKey();\n"+
+           " }\n"
+        }
+    };
 const buttonStyle = (isHovered) => ({
     backgroundColor: isHovered ? 'lightgray' : 'darkgray',
     border: "none",
@@ -104,6 +117,7 @@ const StudentLab = () => {
         <div>
             <ul style={{backgroundColor:"lightgrey",padding:"10px"}}>
                 <Button className='editor-button mx-2'style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("index.html")}>JavaScript</Button>
+                <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("program.cs")}>#C</Button>
                 <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("script.py")}>Python</Button>
                 <Button className='editor-button mx-2' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={() => setFileName("main.java")}>Java</Button>
                 <Button className='editor-button' style={buttonStyle(false)} onMouseEnter={e => e.target.style.backgroundColor = 'lightgray'}onMouseLeave={e => e.target.style.backgroundColor = 'darkgray'}onClick={getEditorValue}>Show code</Button>
