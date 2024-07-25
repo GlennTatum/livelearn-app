@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import { sendExam } from "./utils";
 import Form from "react-bootstrap/Form";
+import { Col, Row } from "react-bootstrap";
 
 const FeedbackGen = () => {
   const [subject, setSubject] = useState("");
-
+  const [name, setName] = useState("");
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubjectChange = (event) => {
     setSubject(event.target.value);
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
   };
 
   const handleFilechange = async (event) => {
@@ -32,7 +37,7 @@ const FeedbackGen = () => {
       const fileContent = e.target.result;
 
       try {
-        const res = await sendExam(fileContent, subject);
+        const res = await sendExam(fileContent, subject, name);
 
         setResponse(res);
       } catch (error) {
@@ -57,15 +62,34 @@ const FeedbackGen = () => {
       >
         <div className="w-full max-w-md" style={{ backgroundColor: "azure" }}>
           <div className="mb-4">
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Subject: </Form.Label>
-              <Form.Control
-                type="subject"
-                placeholder="Enter the subject name"
-                id="subject"
-                onChange={handleSubjectChange}
-              />
-            </Form.Group>
+            <Row>
+              <Form.Group
+                as={Col}
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Subject: </Form.Label>
+                <Form.Control
+                  type="subject"
+                  placeholder="Enter the subject name"
+                  id="subject"
+                  onChange={handleSubjectChange}
+                />
+              </Form.Group>
+              <Form.Group
+                as={Col}
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>Student Name: </Form.Label>
+                <Form.Control
+                  type="subject"
+                  placeholder="Enter the student's name"
+                  id="subject"
+                  onChange={handleNameChange}
+                />
+              </Form.Group>
+            </Row>
           </div>
 
           <div className="mb-4">
