@@ -1,4 +1,62 @@
 import axios from "axios";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+export const GeminiSend = async (options) => {
+  const genAI = new GoogleGenerativeAI(
+    "AIzaSyDjPJrMD5oh0_wIJZRWOXzjAKWep6hHQZ8"
+  );
+
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+  const filereader = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const dataURL = e.target.result;
+        const content = dataURL.split(",")[1]; // data,base64,<content>
+        resolve(content);
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file); // read as base64 content
+    });
+  };
+
+  let prompt = options.prompt;
+
+  if (options.prompt !== undefined && options.file !== null) {
+    if (!(options.file instanceof Blob)) {
+      throw new Error("invalid file");
+    }
+
+    let blob;
+    try {
+      blob = await filereader(options.file);
+    } catch (error) {
+      console.error("error reading file", error);
+      throw error;
+    }
+
+    let geminiFileOptions = {
+      inlineData: {
+        data: blob, // Should be of type Buffer
+        mimeType: options.file.type || "application/octet-stream", // TODO check for png mime type
+      },
+    };
+
+    const result = await model.generateContent([prompt, geminiFileOptions]);
+
+    return result.response.text();
+  }
+
+  const result = await model.generateContent([prompt]);
+
+  return result.response.text();
+};
 
 export const send = async (text, subject) => {
   const apiKey = "sk-proj-hIQjVns3OHNrnbZElBXiT3BlbkFJJsxCzE7zyVrkRPaeG2Zl";

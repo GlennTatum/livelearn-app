@@ -20,7 +20,7 @@ const Login = () => {
   const student_user = "student";
   const student_pass = "password1";
 
-  const teacher_user = "admin";
+  const teacher_user = "faculty";
   const teacher_pass = "password";
 
   const handleSubmit = (e) => {
