@@ -1,0 +1,38 @@
+.topcontainer {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.column {
+    padding: 4px;
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow: 20px 20px 60px #bebebe,
+        -20px -20px 60px #ffffff;
+    padding-bottom: 20px;
+}
+.gutter {
+    width: 4px;
+}
+
+.box {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
+}
+
+.chatbox {
+    margin-top: 20%;
+}
+
+.profilepicture {
+    margin-top: 12px;
+    width: 50%;
+}
+
+.flexcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
