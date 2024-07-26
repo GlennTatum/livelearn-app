@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -60,6 +61,15 @@ function NavBar() {
 
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search for features"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
         </Container>
       </Navbar>
       <br />
