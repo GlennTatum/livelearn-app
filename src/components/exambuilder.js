@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { sendFeedback } from "./utils";
+import React, { useEffect, useState } from "react";
+import { GeminiSend } from "./utils";
 import Form from "react-bootstrap/Form";
 
 const ExamBuilder = () => {
@@ -8,6 +8,8 @@ const ExamBuilder = () => {
   const [file, setFile] = useState(null);
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {}, [response]);
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
@@ -29,24 +31,26 @@ const ExamBuilder = () => {
 
     setIsLoading(true);
 
-    const reader = new FileReader();
+    const prompt = `Note that you are a helpful teacher with years of experience in writing exams and you are also an expert in ${subject}. 
+    Given the following text delimited by triple brackets of feedback to a student after an exam and the png attached below of the actual exam questions (and what the student got correct or wrong), return me a new exam similar - BUT NOT EXACT -  to the one provided, and be as precise as possible.
+    Take a deep breath in between each step; do not forget any of the instructions.
+    Exam feedback: 
+    <<<${feedback}>>>
+    
+    Format the response as follows:
+    - You must generate ALL the exam questions for each subtopic. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
+    - Separate each question
+    - Make sure to take into account every facet and aspect of the provided feedback, based on that, make questions that would most benefit the student's learning process from that feedback
+    - Use bullet points or a numbered list to organize detailed question parts
+    - DO NOT PROVIDE THE SOLUTIONS IN YOUR RESPONSE
+    - Do not branch off and discuss anything else. Go straight into creating the new practice exam and fully generate the response.
+    - Do not hesitate in between creating questions and you must go into extensive detail.`;
 
-    reader.onload = async (e) => {
-      const fileContent = e.target.result;
-
-      try {
-        const res = await sendFeedback(fileContent, feedback, subject);
-
-        setResponse(res);
-      } catch (error) {
-        console.error("Error:", error);
-        console.log(error, error);
-        setResponse("Error processing the request.");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    reader.readAsText(file);
+    let res = await GeminiSend({
+      prompt: prompt,
+      file: file,
+    });
+    setResponse(res);
   };
   return (
     <div style={{ backgroundColor: "lightgray" }}>
@@ -91,7 +95,6 @@ const ExamBuilder = () => {
               type="file"
               id="file"
               onChange={handleFilechange}
-              accept=".txt"
               className="w-full p-2 border rounded"
             />
           </div>
