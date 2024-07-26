@@ -35,6 +35,7 @@ export default function StudentProfilePage() {
                         </div>
                     </Col>
                 </Row>
+                <div><br></br></div>
                 <Row>
                     <Col className={styles.column}>
                         <div className={styles.box}>
@@ -58,6 +59,7 @@ export default function StudentProfilePage() {
                         </div>
                     </Col>
                 </Row>
+                <div><br></br></div>
                 <Row>
                 <Col className={styles.column}>
                         <div className={styles.box}>
