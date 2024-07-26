@@ -64,33 +64,12 @@ const ExamBuilder = () => {
     }
   };
   return (
-    <div style={{ backgroundColor: "lightgray" }}>
-      <h1
-        className=" p-4 text-center"
-        style={{ fontSize: "48px", fontFamily: "Montserrat" }}
-      >
-        Exam builder
-      </h1>
-
-      <h3 className="my-4 text-center" style={{ fontFamily: "Montserrat" }}>
-        Study smarter, no more scouring the internet for practice exams.
-      </h3>
-      <div
-        className="mt-8"
-        style={{ fontFamily: "Montserrat", padding: "8px" }}
-      >
-        <p className="text-lg" style={{ fontSize: "20px" }}>
-          Enter your subject/class, enter the feedback from your last exam and
-          upload photos of your graded exam
-        </p>
-      </div>
-
+    <div>
       <Form
         onSubmit={UploadHandler}
         className="p-4 flex flex-col items-center"
-        style={{ backgroundColor: "azure" }}
       >
-        <div className="w-full max-w-md" style={{ backgroundColor: "azure" }}>
+        <div className="w-full max-w-md">
           <div className="mb-4">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Subject: </Form.Label>

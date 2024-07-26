@@ -3,6 +3,9 @@ import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
 
 import styles from './StudentProfilePage.module.css';
+import ExamBuilder from "./exambuilder";
+import StudentLab from "./StudentLab";
+import StudentContentHelper from "./StudentAssist";
 
 export default function StudentProfilePage() {
 
@@ -16,7 +19,7 @@ export default function StudentProfilePage() {
                                 <Image src="https://i.imgur.com/Y1EMauD.png" roundedCircle alt="profile picture" className={styles.profilepicture} />
                             </div>
                             <div className={styles.flexcontainer}>
-                                <p>Glenn Tatum</p>
+                                <p>Student User</p>
                             </div>
                             <div className={styles.flexcontainer}>
                                 <p>Computer Science</p>
@@ -27,10 +30,10 @@ export default function StudentProfilePage() {
                     <Col className={styles.column}>
                         <div className={styles.box}>
                             <div className={styles.flexcontainer}>
-                                <h2>LiveLearn.ai Chat</h2>
+                                <h2><b>LiveLearn.ai Chat</b></h2>
                             </div>
-                            <div className={styles.chatbox}>
-                                Content
+                            <div>
+                                <StudentContentHelper />
                             </div>
                         </div>
                     </Col>
@@ -40,21 +43,10 @@ export default function StudentProfilePage() {
                     <Col className={styles.column}>
                         <div className={styles.box}>
                             <div className={styles.flexcontainer}>
-                                <h2>Exam Curator</h2>
+                                <h2><b>Exam Builder</b></h2>
                             </div>
                             <div>
-                                Content
-                            </div>
-                        </div>
-                    </Col>
-                    <Col md={1} className={styles.gutter}></Col>
-                    <Col md={4} className={styles.column}>
-                        <div className={styles.box}>
-                            <div className={styles.flexcontainer}>
-                                <h2>Mastery</h2>
-                            </div>
-                            <div>
-                                Content
+                                <ExamBuilder />
                             </div>
                         </div>
                     </Col>
@@ -64,10 +56,10 @@ export default function StudentProfilePage() {
                 <Col className={styles.column}>
                         <div className={styles.box}>
                             <div className={styles.flexcontainer}>
-                                <h2>Code</h2>
+                                <h2><b>Code</b></h2>
                             </div>
                             <div>
-                                Content
+                                <StudentLab />
                             </div>
                         </div>
                     </Col>
