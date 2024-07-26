@@ -44,8 +44,8 @@ const ExamBuilder = () => {
     
     Format the response as follows:
     - You must generate ALL the exam questions for each subtopic. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
-    - Separate each question
-    - Make sure to take into account every facet and aspect of the provided feedback, based on that, make questions that would most benefit the student's learning process from that feedback
+    - Separate each question and make around 8-12 questions in your response.
+    - Make sure to take into account every facet and aspect of the provided feedback. Based on that, make questions that would most benefit the student's learning process from that feedback
     - Use bullet points or a numbered list to organize detailed question parts
     - DO NOT PROVIDE THE SOLUTIONS IN YOUR RESPONSE
     - Do not branch off and discuss anything else. Go straight into creating the new practice exam and fully generate the response.
@@ -67,10 +67,7 @@ const ExamBuilder = () => {
   };
   return (
     <div>
-      <Form
-        onSubmit={UploadHandler}
-        className="p-4 flex flex-col items-center"
-      >
+      <Form onSubmit={UploadHandler} className="p-4 flex flex-col items-center">
         <div className="w-full max-w-md">
           <div className="mb-4">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
