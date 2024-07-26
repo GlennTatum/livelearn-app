@@ -5,7 +5,11 @@ import Navbar from "react-bootstrap/Navbar";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 import Logo from "./liveLearnLogo.png";
+
+import { Form, Button } from "react-bootstrap";
+
 
 function NavBar() {
   const navigate = useNavigate();
@@ -60,9 +64,23 @@ function NavBar() {
                 Content Helper
               </Nav.Link>
             )}
+            {userType === "student" && (
+              <Nav.Link href="/student/studentprofile" className="">
+                Profile
+              </Nav.Link>
+            )}
 
             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
           </Nav>
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search for features"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success">Search</Button>
+          </Form>
         </Container>
       </Navbar>
       <br />

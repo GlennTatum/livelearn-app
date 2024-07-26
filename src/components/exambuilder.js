@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { sendFeedback } from "./utils";
+import React, { useEffect, useState } from "react";
+import { GeminiSend } from "./utils";
 import Form from "react-bootstrap/Form";
 
 const ExamBuilder = () => {
   const [subject, setSubject] = useState("");
   const [feedback, setFeedback] = useState("");
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {}, [response]);
 
   const handleFeedbackChange = (event) => {
     setFeedback(event.target.value);
@@ -17,46 +19,56 @@ const ExamBuilder = () => {
   };
 
   const handleFilechange = async (event) => {
-    setFile(event.target.files[0]);
+    if (event.target.files) {
+      setFiles(Array.from(event.target.files));
+    }
   };
 
   const UploadHandler = async (event) => {
     event.preventDefault();
-    if (!feedback || !file || !subject) {
+    let res;
+    if (!feedback || files.length === 0 || !subject) {
       alert("Please enter a subject/feedback and select a file first.");
       return;
     }
 
     setIsLoading(true);
-
-    const reader = new FileReader();
-
-    reader.onload = async (e) => {
-      const fileContent = e.target.result;
-
-      try {
-        const res = await sendFeedback(fileContent, feedback, subject);
-
-        setResponse(res);
-      } catch (error) {
-        console.error("Error:", error);
-        console.log(error, error);
-        setResponse("Error processing the request.");
-      } finally {
-        setIsLoading(false);
+    setResponse("");
+    try {
+      const prompt = `Note that you are a helpful teacher with years of experience in writing exams and you are also an expert in ${subject}. 
+    Given the following text delimited by triple brackets of feedback to a student after an exam and the png attached below of the actual exam questions (and what the student got correct or wrong), return me a new exam similar - BUT NOT EXACT -  to the one provided, and be as precise as possible.
+    Take a deep breath in between each step; do not forget any of the instructions.
+    
+    Exam feedback: 
+    <<<${feedback}>>>
+    
+    Format the response as follows:
+    - You must generate ALL the exam questions for each subtopic. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
+    - Separate each question and make around 8-12 questions in your response.
+    - Make sure to take into account every facet and aspect of the provided feedback. Based on that, make questions that would most benefit the student's learning process from that feedback
+    - Use bullet points or a numbered list to organize detailed question parts
+    - DO NOT PROVIDE THE SOLUTIONS IN YOUR RESPONSE
+    - Do not branch off and discuss anything else. Go straight into creating the new practice exam and fully generate the response.
+    - Do not hesitate in between creating questions and you must go into extensive detail.`;
+      for (const file of files) {
+        res = await GeminiSend({
+          prompt: prompt,
+          file: file,
+        });
       }
-    };
-    reader.readAsText(file);
+
+      setResponse((prev) => prev + res + "\n\n");
+    } catch (error) {
+      console.error("error processing file", error);
+      setResponse("Error with file");
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
-    <div style={{ backgroundColor: "lightgray" }}>
-      <h1 className=" p-4 text-center">Exam builder</h1>
-      <Form
-        onSubmit={UploadHandler}
-        className="p-4 flex flex-col items-center"
-        style={{ backgroundColor: "azure" }}
-      >
-        <div className="w-full max-w-md" style={{ backgroundColor: "azure" }}>
+    <div>
+      <Form onSubmit={UploadHandler} className="p-4 flex flex-col items-center">
+        <div className="w-full max-w-md">
           <div className="mb-4">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Subject: </Form.Label>
@@ -85,14 +97,14 @@ const ExamBuilder = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="file" className="block mb-2">
-              File:{" "}
+              Past exam:{" "}
             </label>
             <input
               type="file"
               id="file"
               onChange={handleFilechange}
-              accept=".txt"
               className="w-full p-2 border rounded"
+              multiple
             />
           </div>
         </div>
@@ -100,12 +112,12 @@ const ExamBuilder = () => {
         <button
           type="submit"
           className="mt-4 px-4 py-2 text-black rounded hover:bg-blue-600"
-          disabled={isLoading || !file || !feedback || !subject}
+          disabled={isLoading || files.length === 0 || !feedback || !subject}
         >
           {isLoading ? "Processing..." : "Upload your past exam to LiveLearnAI"}
         </button>
       </Form>
-      {response && (
+      {(isLoading || response) && (
         <div className="mt-8 p-4">
           <h3 className="text-xl font-bold mb-4">Practice exam:</h3>
           <form>
@@ -122,10 +134,17 @@ const ExamBuilder = () => {
                 lineHeight: 1.6,
                 color: "#333",
               }}
-              dangerouslySetInnerHTML={{
-                __html: response.replace(/\n/g, "<br/>"),
-              }}
-            />
+            >
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: response.replace(/\n/g, "<br/>"),
+                  }}
+                />
+              )}
+            </div>
           </form>
         </div>
       )}
