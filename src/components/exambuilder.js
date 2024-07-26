@@ -33,10 +33,12 @@ const ExamBuilder = () => {
     }
 
     setIsLoading(true);
+    setResponse("");
     try {
       const prompt = `Note that you are a helpful teacher with years of experience in writing exams and you are also an expert in ${subject}. 
     Given the following text delimited by triple brackets of feedback to a student after an exam and the png attached below of the actual exam questions (and what the student got correct or wrong), return me a new exam similar - BUT NOT EXACT -  to the one provided, and be as precise as possible.
     Take a deep breath in between each step; do not forget any of the instructions.
+    
     Exam feedback: 
     <<<${feedback}>>>
     
@@ -139,7 +141,7 @@ const ExamBuilder = () => {
           {isLoading ? "Processing..." : "Upload your past exam to LiveLearnAI"}
         </button>
       </Form>
-      {response && (
+      {(isLoading || response) && (
         <div className="mt-8 p-4">
           <h3 className="text-xl font-bold mb-4">Practice exam:</h3>
           <form>
@@ -156,10 +158,17 @@ const ExamBuilder = () => {
                 lineHeight: 1.6,
                 color: "#333",
               }}
-              dangerouslySetInnerHTML={{
-                __html: response.replace(/\n/g, "<br/>"),
-              }}
-            />
+            >
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: response.replace(/\n/g, "<br/>"),
+                  }}
+                />
+              )}
+            </div>
           </form>
         </div>
       )}

@@ -30,6 +30,7 @@ const FeedbackGen = () => {
 
   const UploadHandler = async (event) => {
     event.preventDefault();
+
     let res;
     if (files.length === 0 || !subject) {
       alert("Please enter a subject/feedback and select a file first.");
@@ -37,6 +38,7 @@ const FeedbackGen = () => {
     }
 
     setIsLoading(true);
+    setResponse("");
 
     try {
       const feedbackprompt = `Note that you are a helpful teacher with years of experience in grading exams, writing feedback and you are also an expert in ${subject}. Given the following graded exam in the png attached below, return your feedback (like a teacher would on the end of an exam) on how the student could improve for next time etc, and be as precise as possible. The student's name is delimted by a square bracket.
@@ -51,12 +53,13 @@ const FeedbackGen = () => {
   study_types: list out any recommended types of studying the student should do to improve on a specific subject
 
   Format the response as follows:
-  - Make sure to use the stud ent's name appropriately in sentences WHERE IT IS APPLICABLE and not in every sentence.
+  - DO NOT list the attributes in the format that you read them in. Instead just supplement them throughout the main body. Talk about the attributes and include them in sentences like you normally would if you were writing a formal piece of constructive feedback for a student.
+  - Do not use any extra styling or highlights, just write out the feedback and make sure your grammar is accurate.
+  - Make sure to use the student's name appropriately in sentences WHERE IT IS APPLICABLE and not in every sentence.
   - You must generate feedback for ALL the exam questions. It is CRITICAL that YOU DO NOT LEAVE ANY OUT.
   - The response should be 1-2 paragraphs long, depending on how much they got right or wrong (eg. if more was wrong then there should be more feedback on how to improve)
   - Do not branch off and discuss anything else. Go straight into generating the feedback and fully generate the response and do not leave anything out.
-  - Do not hesitate and you must go into extensive detail.
-  - You do not need to list the attributes in the format that they are written in, just write them throughout the paragraph like you normally would for the main body of feedback.`;
+  - Do not hesitate and you must go into extensive detail.`;
 
       for (const file of files) {
         // eslint-disable-next-line no-unused-vars
@@ -158,12 +161,12 @@ const FeedbackGen = () => {
             : "Upload the student's graded exam to LiveLearnAI"}
         </button>
       </Form>
-      {response && (
+      {(isLoading || response) && (
         <div className="mt-8 p-4">
           <h3 className="text-xl font-bold mb-4">Feedback to student</h3>
           <form>
             <div
-              className="exam"
+              className="feedback-container"
               style={{
                 backgroundColor: "#f8f9fa",
                 border: "1px solid #e9ecef",
@@ -175,10 +178,17 @@ const FeedbackGen = () => {
                 lineHeight: 1.6,
                 color: "#333",
               }}
-              dangerouslySetInnerHTML={{
-                __html: response.replace(/\n/g, "<br/>"),
-              }}
-            />
+            >
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: response.replace(/\n/g, "<br/>"),
+                  }}
+                />
+              )}
+            </div>
           </form>
         </div>
       )}
