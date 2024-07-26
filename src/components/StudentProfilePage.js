@@ -1,5 +1,4 @@
 import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
 import Image from "react-bootstrap/Image";
 import Col from "react-bootstrap/Col";
 
