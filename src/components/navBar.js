@@ -5,7 +5,11 @@ import Navbar from "react-bootstrap/Navbar";
 import { useAuth } from "../AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+import Logo from "./liveLearnLogo.png";
+
 import { Form, Button } from "react-bootstrap";
+
 
 function NavBar() {
   const navigate = useNavigate();
@@ -25,6 +29,13 @@ function NavBar() {
             as={Link}
             to={userType === "teacher" ? "/teacher" : "/student"}
           >
+            <img
+              src={Logo}
+              width="40" // Adjust width as needed
+              height="40" // Adjust height as needed
+              className="d-inline-block align-top" // Aligns the image with the text
+              alt="LiveLearn Logo"
+            />{' '}
             LiveLearn
           </Navbar.Brand>
           <Nav className="me-auto gap-4">
