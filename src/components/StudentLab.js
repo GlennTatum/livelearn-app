@@ -1,3 +1,5 @@
+/* eslint no-eval: 0 */
+// DO NOT REMOVE THIS ESLINT STATEMENT
 import React, { useState, useRef } from 'react';
 import Editor from "@monaco-editor/react";
 import Button from "react-bootstrap/Button";
