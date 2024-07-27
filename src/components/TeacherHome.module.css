@@ -1,0 +1,57 @@
+.teacherHomeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f8;
+    color: #333;
+    min-height: 100vh;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 50px;
+  }
+  
+  .logo {
+    height: 50px;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .footer {
+    padding: 10px;
+    background-color: #ddd;
+    width: 100%;
+    text-align: center;
+  }
+  
+  h1, h2, h3 {
+    margin: 10px;
+  }
+  
+  p {
+    margin: 5px;
+    line-height: 1.5;
+  }
+  
