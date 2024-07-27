@@ -1,0 +1,73 @@
+.studentHomeContainer {
+    display: flex;
+  justify-content: center;
+  flex-direction: column; /* Ensures vertical stacking of elements */
+  align-items: center;
+    text-align: center;
+    color: #333;
+    margin: 20px;
+  }
+  
+  .header {
+    background-color: #333;
+    padding: 20px;
+    font-size: 1.5em;
+    color: #ccc;
+    width:100%;
+  }
+  
+  .mainContent {
+    margin: 20px 0;
+    width: 80%; /* Limiting the width to improve the layout of the carousel and other content */
+  }
+  
+  .carouselImage {
+    max-height: 400px; /* Adjusted height to make the carousel smaller */
+    width: auto; /* Width automatically adjusts to maintain aspect ratio */
+    object-fit: cover; /* Ensures images cover the area well without stretching */
+  }
+  
+  .carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Adds a slight dark background to text for better readability */
+    border-radius: 10px; /* Optional: Rounds the corners of the caption background */
+    padding: 10px;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .feature {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #333;
+    margin: 10px;
+    background-color: #333;
+    color: #ccc;
+    height: 200px; /* Maintaining the height as specified for consistent design */
+  }
+  
+  .buttonFeature {
+    background-color: rgb(104, 107, 109);
+    border: none; /* Updated to remove border visuals */
+    color: #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    height: 50px;
+    width: 150px;
+    cursor: pointer; /* Updated to correct the cursor property value */
+  }
+  
+  .footer {
+    padding: 10px;
+    background-color: #ccc;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: #333;
+  }
+  

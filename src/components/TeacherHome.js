@@ -17,7 +17,7 @@ const TeacherHome = () => {
       </header>
       <main className={styles.mainContent}>
         <Carousel>
-          <Carousel.Item>
+          <Carousel.Item interval={1000}> {/* Slide will auto-scroll every 3 seconds */}
             <img style={{height:"1000px",width:"1400px"}}
               className="d-block"
               src={aiAssisted}
@@ -28,7 +28,7 @@ const TeacherHome = () => {
               <p>Create dynamic lesson plans that adapt to your students' needs.</p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item interval={1000}> {/* Same interval for consistency across slides */}
             <img style={{height:"1000px",width:"1400px"}}
               className="d-block "
               src={realtimeAnalytics}
@@ -39,7 +39,7 @@ const TeacherHome = () => {
               <p>Get real-time insights to adjust your teaching strategies on the fly.</p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item>
+          <Carousel.Item interval={1000}> {/* Maintains the 3-second interval here too */}
             <img style={{height:"1000px",width:"1400px"}}
               className="d-block"
               src={feedback}
