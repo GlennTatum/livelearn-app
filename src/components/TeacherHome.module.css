@@ -21,16 +21,9 @@
     height: 50px;
   }
   
-  .mainContent { /* ensure class name matches what is used in JSX if different */
+  .main-content {
     flex: 1;
     padding: 20px;
-    width: 80%; /* Control the width to manage size of the carousel and content */
-  }
-  
-  .carouselImage { /* Specific class for carousel images */
-    max-height: 500px; /* Set a maximum height */
-    width: auto; /* Maintain the aspect ratio */
-    object-fit: cover; /* Cover the area of the element without stretching the image */
   }
   
   .features {
