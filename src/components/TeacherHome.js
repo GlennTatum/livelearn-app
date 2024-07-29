@@ -11,15 +11,15 @@ import feedback from './feedback.webp';
 const TeacherHome = () => {
   return (
     <div className={styles.teacherHomeContainer}>
-      <header className="header">
+      <header className={styles.header}>
         <img src={logo} alt="LiveLearn Logo" className="logo" />
         <h1>Welcome to LiveLearn</h1>
       </header>
       <main className={styles.mainContent}>
         <Carousel>
-          <Carousel.Item interval={1000}> {/* Slide will auto-scroll every 3 seconds */}
-            <img style={{height:"1000px",width:"1400px"}}
-              className="d-block"
+          <Carousel.Item interval={1000}>
+            <img
+              className={`d-block w-100 ${styles.carouselImage}`} // Apply the carouselImage class from CSS
               src={aiAssisted}
               alt="First slide"
             />
@@ -28,9 +28,9 @@ const TeacherHome = () => {
               <p>Create dynamic lesson plans that adapt to your students' needs.</p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item interval={1000}> {/* Same interval for consistency across slides */}
-            <img style={{height:"1000px",width:"1400px"}}
-              className="d-block "
+          <Carousel.Item interval={1000}>
+            <img
+              className={`d-block w-100 ${styles.carouselImage}`} // Ensure consistent application of styles
               src={realtimeAnalytics}
               alt="Second slide"
             />
@@ -39,9 +39,9 @@ const TeacherHome = () => {
               <p>Get real-time insights to adjust your teaching strategies on the fly.</p>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item interval={1000}> {/* Maintains the 3-second interval here too */}
-            <img style={{height:"1000px",width:"1400px"}}
-              className="d-block"
+          <Carousel.Item interval={1000}>
+            <img
+              className={`d-block w-100 ${styles.carouselImage}`}
               src={feedback}
               alt="Third slide"
             />
