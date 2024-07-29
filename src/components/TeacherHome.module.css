@@ -24,6 +24,13 @@
   .main-content {
     flex: 1;
     padding: 20px;
+    width: 80%;
+  }
+  
+  .carouselImage { /* Specific class for carousel images */
+    max-height: 500px; /* Set a maximum height */
+    width: auto; /* Maintain the aspect ratio */
+    object-fit: cover; /* Cover the area of the element without stretching the image */
   }
   
   .features {
