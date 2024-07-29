@@ -42,7 +42,7 @@ const FeedbackGen = () => {
 
     try {
       const feedbackprompt = `Note that you are a helpful teacher with years of experience in grading exams, writing feedback and you are also an expert in ${subject}. Given the following graded exam in the png attached below, return your feedback (like a teacher would on the end of an exam) on how the student could improve for next time and be as precise as possible. The student's name is delimted by a square bracket.
-      Also note that the graded exam will contain annotations next to each of the question responses, either "(Correct)" or "(Incorrect)". That will be your guideline for what the student should improve on if that question was incorrect.
+      Also note that the graded exam will contain annotations next to each of the question responses, either "(Correct)", "(Incorrect)" or "(Partially correct)". That will be your guideline for what the student needs work on.
       Remember that the grader might not be perfect. So please remember to carefully mark each question yourself to see if the student actually got it wrong.
   Take a deep breath in between each step; do not forget any of the instructions.
   
