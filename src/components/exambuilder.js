@@ -36,7 +36,8 @@ const ExamBuilder = () => {
     setResponse("");
     try {
       const prompt = `Note that you are a helpful teacher with years of experience in writing exams and you are also an expert in ${subject}. 
-    Given the following feedback to a student on their exam (delimited by triple brackets) and the png attached below of the actual exam questions, return me a new exam similar - BUT NOT EXACT -  to the one provided, and be as precise as possible.
+    Given the following feedback to a student on their exam (delimited by triple brackets) and the png attached below of the actual exam questions, return me a new exam similar - BUT NOT EXACT - to the one provided, and be as precise as possible.
+
     The feedback should tell you what the student did right or wrong and what they need to work on. Use that to generate the exam so that the student can practice more of what they got wrong.
     Take a deep breath in between each step; do not forget any of the instructions. You do not need to say out loud that you are taking a deep breath.
     
@@ -49,6 +50,7 @@ const ExamBuilder = () => {
     - Make sure to take into account every facet and aspect of the provided feedback. Based on that, make questions that would most benefit the student's learning process from that feedback
     - Use bullet points or a numbered list to organize detailed question parts
     - DO NOT PROVIDE THE SOLUTIONS IN YOUR RESPONSE
+    - DO NOT reuse the questions from the sample exam.
     - Do not branch off and discuss anything else. Go straight into creating the new practice exam and fully generate the response.
     - Do not hesitate in between creating questions and you must go into extensive detail.`;
       for (const file of files) {
