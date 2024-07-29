@@ -19,6 +19,9 @@ const TeacherHome = () => {
         <Carousel>
           <Carousel.Item interval={1000}>
             <img
+              className={`d-block w-100 ${styles.carouselImage}`} // Apply the carouselImage class from CSS
+          <Carousel.Item interval={1000}>
+            <img
               className={`d-block w-100 ${styles.carouselImage}`}
               src={aiAssisted}
               alt="First slide"
@@ -30,6 +33,9 @@ const TeacherHome = () => {
               </p>
             </Carousel.Caption>
           </Carousel.Item>
+          <Carousel.Item interval={1000}>
+            <img
+              className={`d-block w-100 ${styles.carouselImage}`} // Ensure consistent application of styles
           <Carousel.Item interval={1000}>
             <img
               className={`d-block w-100 ${styles.carouselImage}`}
@@ -44,6 +50,9 @@ const TeacherHome = () => {
               </p>
             </Carousel.Caption>
           </Carousel.Item>
+          <Carousel.Item interval={1000}>
+            <img
+              className={`d-block w-100 ${styles.carouselImage}`}
           <Carousel.Item interval={1000}>
             {" "}
             {/* Maintains the 3-second interval here too */}
