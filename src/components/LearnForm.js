@@ -26,12 +26,13 @@ const LearnForm = () => {
     }
 
     setIsLoading(true);
+    setResponse("");
     const APIprompt = `Remember that You are a helpful teacher with years of experience in making lesson plans and you are also an expert in ${subject}
     Given the following text in the png file attached of a curriculum for that subject, return me detailed lesson plans for each individual subtopic and be as precise as possible.
   Make sure you take into account this attribute:
   learning_types: Students can be "Auditory", "Kinesthetic", "Visual","Interpersonal", or "Reading and Writing" learners. Generate a different version of each lesson plan for each learning type.
   
-  Take a deep breath in between each step; do not forget any of the instructions.
+  Take a deep breath in between each step; do not forget any of the instructions. Do not say aloud that you are taking a deep breath.
  
   
   Format the response as follows:
